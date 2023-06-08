@@ -1,4 +1,4 @@
-IP PABX 
+IP PABX (and Radio Channel MPU 3 in same Pi)
 1. Download raspberry Pi Asterisk/FreePBX pre-built image from https://www.raspberry-asterisk.org/ and burn to SD card.
 2. Plan your IP network and setup static IP for this Pi because all clients will point to this. 
 3. Configure FreePBX with extension and conference numbers. There are online tutorials available like https://www.whichvoip.com/articles/freepbx-setup-tutorial.htm. 
