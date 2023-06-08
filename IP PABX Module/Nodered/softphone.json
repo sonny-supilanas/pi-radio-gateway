@@ -1,0 +1,320 @@
+[
+    {
+        "id": "4ed3ab7e55280d4e",
+        "type": "tab",
+        "label": "softphone",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "3b4bd9929152d087",
+        "type": "daemon",
+        "z": "4ed3ab7e55280d4e",
+        "name": "endpoint",
+        "command": "twinkle",
+        "args": "-c -f terminal.cfg --force",
+        "autorun": false,
+        "cr": false,
+        "redo": true,
+        "op": "string",
+        "closer": "SIGKILL",
+        "x": 200,
+        "y": 160,
+        "wires": [
+            [
+                "2945659730c8aea4",
+                "2b11f6613a392044"
+            ],
+            [
+                "f1894fddbf1b1e22"
+            ],
+            [
+                "155f1d4e2b902e46"
+            ]
+        ]
+    },
+    {
+        "id": "2945659730c8aea4",
+        "type": "debug",
+        "z": "4ed3ab7e55280d4e",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "2b11f6613a392044",
+        "type": "switch",
+        "z": "4ed3ab7e55280d4e",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "registration succeeded",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "far end ended call",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "call ended",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "call failed",
+                "vt": "str"
+            },
+            {
+                "t": "cont",
+                "v": "far end answered call",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 5,
+        "x": 130,
+        "y": 320,
+        "wires": [
+            [
+                "4c3a9cac8f8fdd99"
+            ],
+            [
+                "9efba4c78b5dd04f"
+            ],
+            [
+                "9efba4c78b5dd04f"
+            ],
+            [
+                "11af18d0b98ee748"
+            ],
+            [
+                "f657cb56a7446c5e"
+            ]
+        ]
+    },
+    {
+        "id": "f1894fddbf1b1e22",
+        "type": "debug",
+        "z": "4ed3ab7e55280d4e",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "155f1d4e2b902e46",
+        "type": "debug",
+        "z": "4ed3ab7e55280d4e",
+        "name": "",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 630,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "9efba4c78b5dd04f",
+        "type": "delay",
+        "z": "4ed3ab7e55280d4e",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "10",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "outputs": 1,
+        "x": 320,
+        "y": 360,
+        "wires": [
+            [
+                "37954b914d38cf7b"
+            ]
+        ]
+    },
+    {
+        "id": "37954b914d38cf7b",
+        "type": "sqlite",
+        "z": "4ed3ab7e55280d4e",
+        "mydb": "97158aa1.026308",
+        "sqlquery": "fixed",
+        "sql": "select conf from table1;",
+        "name": "query",
+        "x": 490,
+        "y": 300,
+        "wires": [
+            [
+                "8f9779cebfdea466"
+            ]
+        ]
+    },
+    {
+        "id": "8f9779cebfdea466",
+        "type": "function",
+        "z": "4ed3ab7e55280d4e",
+        "name": "",
+        "func": "var confnum = msg.payload[0].conf;\n//flow.set('conf', confnum);\nmsg.payload = \"call sip:\" + confnum + \"@192.168.169.1\" + \"\\n\";\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 240,
+        "wires": [
+            [
+                "3b4bd9929152d087"
+            ]
+        ]
+    },
+    {
+        "id": "4c3a9cac8f8fdd99",
+        "type": "delay",
+        "z": "4ed3ab7e55280d4e",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "outputs": 1,
+        "x": 320,
+        "y": 300,
+        "wires": [
+            [
+                "37954b914d38cf7b"
+            ]
+        ]
+    },
+    {
+        "id": "637019dfc4f0ec05",
+        "type": "function",
+        "z": "4ed3ab7e55280d4e",
+        "name": "",
+        "func": "msg.payload = 'bye\\n';\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 80,
+        "wires": [
+            [
+                "3b4bd9929152d087"
+            ]
+        ]
+    },
+    {
+        "id": "11af18d0b98ee748",
+        "type": "delay",
+        "z": "4ed3ab7e55280d4e",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "20",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "outputs": 1,
+        "x": 320,
+        "y": 400,
+        "wires": [
+            [
+                "37954b914d38cf7b"
+            ]
+        ]
+    },
+    {
+        "id": "f657cb56a7446c5e",
+        "type": "function",
+        "z": "4ed3ab7e55280d4e",
+        "name": "",
+        "func": "msg.payload = \"ready\"\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 200,
+        "y": 440,
+        "wires": [
+            [
+                "865b17f653d2ab07"
+            ]
+        ]
+    },
+    {
+        "id": "96ee0840db65f0b6",
+        "type": "link in",
+        "z": "4ed3ab7e55280d4e",
+        "name": "A",
+        "links": [
+            "6e150436058bd71c"
+        ],
+        "x": 175,
+        "y": 80,
+        "wires": [
+            [
+                "637019dfc4f0ec05"
+            ]
+        ]
+    },
+    {
+        "id": "865b17f653d2ab07",
+        "type": "link out",
+        "z": "4ed3ab7e55280d4e",
+        "name": "B",
+        "mode": "link",
+        "links": [
+            "d740c9e89215fea2"
+        ],
+        "x": 365,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "97158aa1.026308",
+        "type": "sqlitedb",
+        "db": "/home/pi/db/data.db",
+        "mode": "RW"
+    }
+]

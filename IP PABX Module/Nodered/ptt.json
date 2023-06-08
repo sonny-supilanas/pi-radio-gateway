@@ -1,0 +1,554 @@
+[
+    {
+        "id": "28973277.e9adbe",
+        "type": "tab",
+        "label": "ptt",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "253fe8a5.256018",
+        "type": "tcp in",
+        "z": "28973277.e9adbe",
+        "name": "",
+        "server": "server",
+        "host": "",
+        "port": "13011",
+        "datamode": "stream",
+        "datatype": "utf8",
+        "newline": "",
+        "topic": "",
+        "base64": false,
+        "x": 140,
+        "y": 80,
+        "wires": [
+            [
+                "bb73d6ea.c0ae88"
+            ]
+        ]
+    },
+    {
+        "id": "346c787b.a1c898",
+        "type": "tcp out",
+        "z": "28973277.e9adbe",
+        "name": "",
+        "host": "",
+        "port": "",
+        "beserver": "reply",
+        "base64": false,
+        "end": false,
+        "x": 590,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "bb73d6ea.c0ae88",
+        "type": "switch",
+        "z": "28973277.e9adbe",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "PTT",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 270,
+        "y": 160,
+        "wires": [
+            [
+                "346c787b.a1c898"
+            ],
+            [
+                "9ca3e183.7f782"
+            ]
+        ]
+    },
+    {
+        "id": "9ca3e183.7f782",
+        "type": "function",
+        "z": "28973277.e9adbe",
+        "name": "",
+        "func": "let arr = msg.payload.split(\"-\");\nlet str = { payload : arr[0] };\nreturn [ str, msg ]; //original payload was returned to 2nd output",
+        "outputs": 2,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 180,
+        "y": 300,
+        "wires": [
+            [
+                "a4ab4266a417418f"
+            ],
+            [
+                "caf052b7aec2eba7"
+            ]
+        ]
+    },
+    {
+        "id": "a4ab4266a417418f",
+        "type": "delay",
+        "z": "28973277.e9adbe",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 2,
+        "x": 390,
+        "y": 300,
+        "wires": [
+            [
+                "346c787b.a1c898"
+            ],
+            [
+                "346c787b.a1c898"
+            ]
+        ]
+    },
+    {
+        "id": "e5eec8e21d9d01de",
+        "type": "comment",
+        "z": "28973277.e9adbe",
+        "name": "",
+        "info": "sends ON/OFF string on the TCP socket back to c# VT to determine displaying \"KEY\" string",
+        "x": 340,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "caf052b7aec2eba7",
+        "type": "switch",
+        "z": "28973277.e9adbe",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "ON-2011",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "OFF-2011",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ON-2012",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "OFF-2012",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ON-2013",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "OFF-2013",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 6,
+        "x": 250,
+        "y": 460,
+        "wires": [
+            [
+                "82aaf8a59312a863"
+            ],
+            [
+                "698359881574b7b0"
+            ],
+            [
+                "dfb419a72a43edb8"
+            ],
+            [
+                "5a3b5cf059bbd4b5"
+            ],
+            [
+                "0cd76c0d2b16cdeb"
+            ],
+            [
+                "6d9523522ab8793a"
+            ]
+        ]
+    },
+    {
+        "id": "4edd67d777c6e9c4",
+        "type": "rpi-gpio out",
+        "z": "28973277.e9adbe",
+        "name": "GPIO17 - 11",
+        "pin": "17",
+        "set": true,
+        "level": "1",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 670,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "7cb5c131646d2a8c",
+        "type": "rpi-gpio out",
+        "z": "28973277.e9adbe",
+        "name": "12 - GPIO18",
+        "pin": "18",
+        "set": true,
+        "level": "1",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 670,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "82aaf8a59312a863",
+        "type": "change",
+        "z": "28973277.e9adbe",
+        "name": "ON-2011",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 440,
+        "y": 380,
+        "wires": [
+            [
+                "4edd67d777c6e9c4",
+                "7cb5c131646d2a8c"
+            ]
+        ]
+    },
+    {
+        "id": "698359881574b7b0",
+        "type": "change",
+        "z": "28973277.e9adbe",
+        "name": "OFF-2011",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 420,
+        "wires": [
+            [
+                "4edd67d777c6e9c4",
+                "7cb5c131646d2a8c"
+            ]
+        ]
+    },
+    {
+        "id": "dfb419a72a43edb8",
+        "type": "change",
+        "z": "28973277.e9adbe",
+        "name": "ON-2012",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 440,
+        "y": 520,
+        "wires": [
+            [
+                "9a45bcc3d2782ac6",
+                "3b882c9ad93d0707"
+            ]
+        ]
+    },
+    {
+        "id": "5a3b5cf059bbd4b5",
+        "type": "change",
+        "z": "28973277.e9adbe",
+        "name": "OFF-2012",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 560,
+        "wires": [
+            [
+                "9a45bcc3d2782ac6",
+                "3b882c9ad93d0707"
+            ]
+        ]
+    },
+    {
+        "id": "9a45bcc3d2782ac6",
+        "type": "rpi-gpio out",
+        "z": "28973277.e9adbe",
+        "name": "GPIO27 - 13 ",
+        "pin": "27",
+        "set": true,
+        "level": "1",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 650,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "3b882c9ad93d0707",
+        "type": "rpi-gpio out",
+        "z": "28973277.e9adbe",
+        "name": "GPIO22 - 15",
+        "pin": "22",
+        "set": true,
+        "level": "1",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 650,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "0cd76c0d2b16cdeb",
+        "type": "change",
+        "z": "28973277.e9adbe",
+        "name": "ON-2013",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 420,
+        "y": 660,
+        "wires": [
+            [
+                "3cc0dda7a64818f9",
+                "3a833f3eebdaf8a2"
+            ]
+        ]
+    },
+    {
+        "id": "6d9523522ab8793a",
+        "type": "change",
+        "z": "28973277.e9adbe",
+        "name": "OFF-2013",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 700,
+        "wires": [
+            [
+                "3cc0dda7a64818f9",
+                "3a833f3eebdaf8a2"
+            ]
+        ]
+    },
+    {
+        "id": "3cc0dda7a64818f9",
+        "type": "rpi-gpio out",
+        "z": "28973277.e9adbe",
+        "name": "16 - GPIO23",
+        "pin": "23",
+        "set": true,
+        "level": "1",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 650,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "3a833f3eebdaf8a2",
+        "type": "rpi-gpio out",
+        "z": "28973277.e9adbe",
+        "name": "18 - GPIO24",
+        "pin": "24",
+        "set": true,
+        "level": "1",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 650,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "19f922be8f16f40d",
+        "type": "link in",
+        "z": "28973277.e9adbe",
+        "name": "2011 ON",
+        "links": [
+            "1de74cbde4bbb5a7"
+        ],
+        "x": 315,
+        "y": 360,
+        "wires": [
+            [
+                "82aaf8a59312a863"
+            ]
+        ]
+    },
+    {
+        "id": "7cc3fd0c349a8855",
+        "type": "link in",
+        "z": "28973277.e9adbe",
+        "name": "2011 OFF",
+        "links": [
+            "8b8a2d8df8d658cb"
+        ],
+        "x": 245,
+        "y": 380,
+        "wires": [
+            [
+                "698359881574b7b0"
+            ]
+        ]
+    },
+    {
+        "id": "1c48da0e93c4a994",
+        "type": "link in",
+        "z": "28973277.e9adbe",
+        "name": "2012 ON",
+        "links": [
+            "af6d7bdc752ce402"
+        ],
+        "x": 215,
+        "y": 540,
+        "wires": [
+            [
+                "dfb419a72a43edb8"
+            ]
+        ]
+    },
+    {
+        "id": "f9bab0a2fdcfe676",
+        "type": "link in",
+        "z": "28973277.e9adbe",
+        "name": "2012 OFF",
+        "links": [
+            "61a2c8711d7c160a"
+        ],
+        "x": 215,
+        "y": 580,
+        "wires": [
+            [
+                "5a3b5cf059bbd4b5"
+            ]
+        ]
+    },
+    {
+        "id": "fe148196295572e6",
+        "type": "link in",
+        "z": "28973277.e9adbe",
+        "name": "2013 ON",
+        "links": [
+            "e07205ce85ccac60"
+        ],
+        "x": 215,
+        "y": 660,
+        "wires": [
+            [
+                "0cd76c0d2b16cdeb"
+            ]
+        ]
+    },
+    {
+        "id": "dc2b2a4ad532ec5a",
+        "type": "link in",
+        "z": "28973277.e9adbe",
+        "name": "2013 OFF",
+        "links": [
+            "fe5f4d92a1b6a53e"
+        ],
+        "x": 215,
+        "y": 700,
+        "wires": [
+            [
+                "6d9523522ab8793a"
+            ]
+        ]
+    }
+]

@@ -1,0 +1,304 @@
+[
+    {
+        "id": "cd77c37112850855",
+        "type": "tab",
+        "label": "dtmf",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "eddb875e28276266",
+        "type": "tail",
+        "z": "cd77c37112850855",
+        "name": "",
+        "filetype": "text",
+        "split": "[\\r]{0,1}\\n",
+        "filename": "/var/log/asterisk/full",
+        "inputs": 0,
+        "x": 150,
+        "y": 80,
+        "wires": [
+            [
+                "818e9bb6f2abb25f"
+            ]
+        ]
+    },
+    {
+        "id": "818e9bb6f2abb25f",
+        "type": "switch",
+        "z": "cd77c37112850855",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "regex",
+                "v": "DTMF begin '1' received",
+                "vt": "str",
+                "case": false
+            },
+            {
+                "t": "regex",
+                "v": "DTMF begin '0' received",
+                "vt": "str",
+                "case": false
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 170,
+        "y": 160,
+        "wires": [
+            [
+                "55450a83ace60768"
+            ],
+            [
+                "d6a89c03bb9f1daa"
+            ]
+        ]
+    },
+    {
+        "id": "55450a83ace60768",
+        "type": "function",
+        "z": "cd77c37112850855",
+        "name": "DTMF 1",
+        "func": "let arr = msg.payload.split(\"/\");\nlet str = { payload : 'PJSIP/' + arr[1]};\nreturn str;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 140,
+        "wires": [
+            [
+                "9532a0a815993f84"
+            ]
+        ]
+    },
+    {
+        "id": "9532a0a815993f84",
+        "type": "exec",
+        "z": "cd77c37112850855",
+        "command": "/home/pi/script/get_room.sh",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 560,
+        "y": 120,
+        "wires": [
+            [
+                "ba1d4734e6608f37"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "d6a89c03bb9f1daa",
+        "type": "function",
+        "z": "cd77c37112850855",
+        "name": "DTMF 0",
+        "func": "let arr = msg.payload.split(\"/\");\nlet str = { payload : 'PJSIP/' + arr[1]};\nreturn str;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 340,
+        "y": 200,
+        "wires": [
+            [
+                "1ba1a3820bf568a3"
+            ]
+        ]
+    },
+    {
+        "id": "ba1d4734e6608f37",
+        "type": "switch",
+        "z": "cd77c37112850855",
+        "name": "PTT ON",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "2011",
+                "vt": "num"
+            },
+            {
+                "t": "cont",
+                "v": "2012",
+                "vt": "num"
+            },
+            {
+                "t": "cont",
+                "v": "2013",
+                "vt": "num"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 3,
+        "x": 780,
+        "y": 80,
+        "wires": [
+            [
+                "1de74cbde4bbb5a7"
+            ],
+            [
+                "af6d7bdc752ce402"
+            ],
+            [
+                "e07205ce85ccac60"
+            ]
+        ]
+    },
+    {
+        "id": "1ba1a3820bf568a3",
+        "type": "exec",
+        "z": "cd77c37112850855",
+        "command": "/home/pi/script/get_room.sh",
+        "addpay": "payload",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "",
+        "x": 560,
+        "y": 220,
+        "wires": [
+            [
+                "33a99222e3373025"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "33a99222e3373025",
+        "type": "switch",
+        "z": "cd77c37112850855",
+        "name": "PTT OFF",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "2011",
+                "vt": "num"
+            },
+            {
+                "t": "cont",
+                "v": "2012",
+                "vt": "num"
+            },
+            {
+                "t": "cont",
+                "v": "2013",
+                "vt": "num"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 3,
+        "x": 780,
+        "y": 180,
+        "wires": [
+            [
+                "8b8a2d8df8d658cb"
+            ],
+            [
+                "61a2c8711d7c160a"
+            ],
+            [
+                "fe5f4d92a1b6a53e"
+            ]
+        ]
+    },
+    {
+        "id": "1de74cbde4bbb5a7",
+        "type": "link out",
+        "z": "cd77c37112850855",
+        "name": "2011 ON",
+        "mode": "link",
+        "links": [
+            "19f922be8f16f40d"
+        ],
+        "x": 935,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "8b8a2d8df8d658cb",
+        "type": "link out",
+        "z": "cd77c37112850855",
+        "name": "2011 OFF",
+        "mode": "link",
+        "links": [
+            "7cc3fd0c349a8855"
+        ],
+        "x": 935,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "af6d7bdc752ce402",
+        "type": "link out",
+        "z": "cd77c37112850855",
+        "name": "2012 ON",
+        "mode": "link",
+        "links": [
+            "1c48da0e93c4a994"
+        ],
+        "x": 995,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "e07205ce85ccac60",
+        "type": "link out",
+        "z": "cd77c37112850855",
+        "name": "2013 ON",
+        "mode": "link",
+        "links": [
+            "fe148196295572e6"
+        ],
+        "x": 1045,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "61a2c8711d7c160a",
+        "type": "link out",
+        "z": "cd77c37112850855",
+        "name": "2012 OFF",
+        "mode": "link",
+        "links": [
+            "f9bab0a2fdcfe676"
+        ],
+        "x": 995,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "fe5f4d92a1b6a53e",
+        "type": "link out",
+        "z": "cd77c37112850855",
+        "name": "2013 OFF",
+        "mode": "link",
+        "links": [
+            "dc2b2a4ad532ec5a"
+        ],
+        "x": 1045,
+        "y": 240,
+        "wires": []
+    }
+]
