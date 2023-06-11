@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+	<title>Simple Live Display</title>
+	<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+	<span>Port 1</span>
+	<table class="fixed">
+		<tr>
+			<td><input type="radio" name="naconf" id="naBridge1" value="2001"><label for="naBridge1">Group 1</label>
+			</td>
+			<td><input type="radio" name="naconf" id="naBridge2" value="2002"><label for="naBridge2">Group 2</label>
+			</td>
+			<td><input type="radio" name="naconf" id="naSingle" value="2011"><label for="naSingle">SINGLE UNIT</label>
+			</td>
+			<td><button type="button" id="naUpdate">UPDATE</button></td>
+			<td><span id="naMessages"></span></td>
+		</tr>
+	</table>
+	<br />
+	<span>Port 2</span>
+	<table class="fixed">
+		<tr>
+			<td><input type="radio" name="afconf" id="afBridge1" value="2001"><label for="afBridge1">Group 1</label>
+			</td>
+			<td><input type="radio" name="afconf" id="afBridge2" value="2002"><label for="afBridge2">Group 2</label>
+			</td>
+			<td><input type="radio" name="afconf" id="afSingle" value="2012"><label for="afSingle">SINGLE UNIT</label>
+			</td>
+			<td><button type="button" id="afUpdate">UPDATE</button></td>
+			<td><span id="afMessages"></span></td>
+		</tr>
+	</table>
+	<br />
+	<span>Port 3</span>
+	<table class="fixed">
+		<tr>
+			<td><input type="radio" name="arconf" id="arBridge1" value="2001"><label for="arBridge1">Group 1</label>
+			</td>
+			<td><input type="radio" name="arconf" id="arBridge2" value="2002"><label for="arBridge2">Group 2</label>
+			</td>
+			<td><input type="radio" name="arconf" id="arSingle" value="2013"><label for="arSingle">SINGLE UNIT</label>
+			</td>
+			<td><button type="button" id="arUpdate">UPDATE</button></td>
+			<td><span id="arMessages"></span></td>
+		</tr>
+	</table>
+	<br />
+	<span>Port 4</span>
+	<table class="fixed">
+		<tr>
+			<td><input type="radio" name="cgconf" id="cgBridge1" value="2001"><label for="cgBridge1">Group 1</label>
+			</td>
+			<td><input type="radio" name="cgconf" id="cgBridge2" value="2002"><label for="cgBridge2">Group 2</label>
+			</td>
+			<td><input type="radio" name="cgconf" id="cgSingle" value="2014"><label for="cgSingle">SINGLE UNIT</label>
+			</td>
+			<td><button type="button" id="cgUpdate">UPDATE</button></td>
+			<td><span id="cgMessages"></span></td>
+		</tr>
+	</table>
+	<hr />
+	<!--<button type="button" id="shutdown">SHUTDOWN</button> &nbsp;&nbsp;&nbsp;
+		<button type="button" id="reboot">REBOOT</button> &nbsp;&nbsp;&nbsp;-->
+	<span id="srMessages"></span>
+	<script type="text/javascript" src="script.js"></script>
+</body>
+
+</html>
