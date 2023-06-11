@@ -1,0 +1,354 @@
+[
+    {
+        "id": "95a39b4369b3aa5b",
+        "type": "tab",
+        "label": "Bridge Channel",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "8d68aab20d8e75e5",
+        "type": "websocket out",
+        "z": "95a39b4369b3aa5b",
+        "name": "socket out",
+        "server": "aa911d85071a4333",
+        "client": "",
+        "x": 670,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "d64947746b0873d2",
+        "type": "websocket in",
+        "z": "95a39b4369b3aa5b",
+        "name": "socket in",
+        "server": "aa911d85071a4333",
+        "client": "",
+        "x": 80,
+        "y": 160,
+        "wires": [
+            [
+                "94925cb12c3f373b"
+            ]
+        ]
+    },
+    {
+        "id": "20034b338a6f8126",
+        "type": "sqlite",
+        "z": "95a39b4369b3aa5b",
+        "mydb": "97158aa1.026308",
+        "sqlquery": "fixed",
+        "sql": "select conf from table1;",
+        "name": "query",
+        "x": 290,
+        "y": 140,
+        "wires": [
+            [
+                "798a73c08fd69138"
+            ]
+        ]
+    },
+    {
+        "id": "94925cb12c3f373b",
+        "type": "switch",
+        "z": "95a39b4369b3aa5b",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "query mpu",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "2001",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "2002",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "2013",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 4,
+        "x": 150,
+        "y": 260,
+        "wires": [
+            [
+                "20034b338a6f8126",
+                "dd2f0a6c94b0105e"
+            ],
+            [
+                "d137fe481461bd77",
+                "f66a6e87e814a99d"
+            ],
+            [
+                "7f74b68e8d1f56ac",
+                "f66a6e87e814a99d"
+            ],
+            [
+                "70547cb4479e8abf",
+                "f66a6e87e814a99d"
+            ]
+        ]
+    },
+    {
+        "id": "798a73c08fd69138",
+        "type": "function",
+        "z": "95a39b4369b3aa5b",
+        "name": "",
+        "func": "msg.payload = msg.payload[0].conf;\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "x": 440,
+        "y": 140,
+        "wires": [
+            [
+                "8d68aab20d8e75e5"
+            ]
+        ]
+    },
+    {
+        "id": "d137fe481461bd77",
+        "type": "sqlite",
+        "z": "95a39b4369b3aa5b",
+        "mydb": "97158aa1.026308",
+        "sqlquery": "fixed",
+        "sql": "update table1 set conf = 2001;",
+        "name": "update",
+        "x": 340,
+        "y": 220,
+        "wires": [
+            [
+                "6e150436058bd71c"
+            ]
+        ]
+    },
+    {
+        "id": "7f74b68e8d1f56ac",
+        "type": "sqlite",
+        "z": "95a39b4369b3aa5b",
+        "mydb": "97158aa1.026308",
+        "sqlquery": "fixed",
+        "sql": "update table1 set conf = 2002;",
+        "name": "update",
+        "x": 340,
+        "y": 260,
+        "wires": [
+            [
+                "6e150436058bd71c"
+            ]
+        ]
+    },
+    {
+        "id": "70547cb4479e8abf",
+        "type": "sqlite",
+        "z": "95a39b4369b3aa5b",
+        "mydb": "97158aa1.026308",
+        "sqlquery": "fixed",
+        "sql": "update table1 set conf = 2013;",
+        "name": "update",
+        "x": 340,
+        "y": 300,
+        "wires": [
+            [
+                "6e150436058bd71c"
+            ]
+        ]
+    },
+    {
+        "id": "6e150436058bd71c",
+        "type": "link out",
+        "z": "95a39b4369b3aa5b",
+        "name": "A",
+        "links": [
+            "1f4e1d6d16b3f4e9",
+            "96ee0840db65f0b6"
+        ],
+        "x": 475,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "d740c9e89215fea2",
+        "type": "link in",
+        "z": "95a39b4369b3aa5b",
+        "name": "B",
+        "links": [
+            "208dc432d74e48cb",
+            "865b17f653d2ab07"
+        ],
+        "x": 515,
+        "y": 60,
+        "wires": [
+            [
+                "8d68aab20d8e75e5"
+            ]
+        ]
+    },
+    {
+        "id": "dd2f0a6c94b0105e",
+        "type": "exec",
+        "z": "95a39b4369b3aa5b",
+        "command": "/home/pi/script/checkLine.sh",
+        "addpay": true,
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "oldrc": false,
+        "name": "check line",
+        "x": 370,
+        "y": 420,
+        "wires": [
+            [
+                "eb21c5fd3e994735"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "eb21c5fd3e994735",
+        "type": "function",
+        "z": "95a39b4369b3aa5b",
+        "name": "",
+        "func": "var str = msg.payload.trim();\n\nif (str == \"16913\") {msg.payload = \"ready\"}\nelse {msg.payload = \"\"}\n\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 580,
+        "y": 380,
+        "wires": [
+            [
+                "8d68aab20d8e75e5"
+            ]
+        ]
+    },
+    {
+        "id": "d970f8f2f6f225b2",
+        "type": "udp out",
+        "z": "95a39b4369b3aa5b",
+        "name": "",
+        "addr": "192.168.169.1",
+        "iface": "",
+        "port": "14011",
+        "ipv": "udp4",
+        "outport": "",
+        "base64": false,
+        "multicast": "false",
+        "x": 550,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "f66a6e87e814a99d",
+        "type": "function",
+        "z": "95a39b4369b3aa5b",
+        "name": "update bridge table",
+        "func": "let str = { payload: \"port3-\" + msg.payload };\nreturn str;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 520,
+        "wires": [
+            [
+                "d970f8f2f6f225b2",
+                "a733bfa8e56d4906"
+            ]
+        ]
+    },
+    {
+        "id": "888c035b58eba4ab",
+        "type": "comment",
+        "z": "95a39b4369b3aa5b",
+        "name": "",
+        "info": "payload input galing sa bridge flow (Bridge Control) via websocket page",
+        "x": 100,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "a733bfa8e56d4906",
+        "type": "debug",
+        "z": "95a39b4369b3aa5b",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "71bbd31b6e75ae11",
+        "type": "comment",
+        "z": "95a39b4369b3aa5b",
+        "name": "",
+        "info": "checkLine script eh ginagamit lang during initial connection or refresh ng bridge page",
+        "x": 360,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "f82c642becf14490",
+        "type": "comment",
+        "z": "95a39b4369b3aa5b",
+        "name": "",
+        "info": "terminal extension",
+        "x": 480,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "b56ebeb5f2ead43a",
+        "type": "comment",
+        "z": "95a39b4369b3aa5b",
+        "name": "",
+        "info": "same to extension number",
+        "x": 640,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "10e2f584c5d249fa",
+        "type": "comment",
+        "z": "95a39b4369b3aa5b",
+        "name": "mpu extension",
+        "info": "",
+        "x": 100,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "aa911d85071a4333",
+        "type": "websocket-listener",
+        "path": "/ws/state",
+        "wholemsg": "false"
+    },
+    {
+        "id": "97158aa1.026308",
+        "type": "sqlitedb",
+        "db": "/home/pi/db/data.db",
+        "mode": "RW"
+    }
+]

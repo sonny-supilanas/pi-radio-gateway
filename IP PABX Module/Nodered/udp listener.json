@@ -1,0 +1,110 @@
+[
+    {
+        "id": "7a0ce80e53d4c531",
+        "type": "tab",
+        "label": "udp listener",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "67753da1aafd344f",
+        "type": "udp in",
+        "z": "7a0ce80e53d4c531",
+        "name": "",
+        "iface": "",
+        "port": "14011",
+        "ipv": "udp4",
+        "multicast": "false",
+        "group": "",
+        "datatype": "utf8",
+        "x": 120,
+        "y": 120,
+        "wires": [
+            [
+                "65c43fe061e60a3c",
+                "73fd41580cdac880"
+            ]
+        ]
+    },
+    {
+        "id": "64cafb38352dfb8f",
+        "type": "sqlite",
+        "z": "7a0ce80e53d4c531",
+        "mydb": "97158aa1.026308",
+        "sqlquery": "msg.topic",
+        "sql": "",
+        "name": "update bridge table",
+        "x": 290,
+        "y": 260,
+        "wires": [
+            [
+                "79e426b0d8f82670"
+            ]
+        ]
+    },
+    {
+        "id": "65c43fe061e60a3c",
+        "type": "function",
+        "z": "7a0ce80e53d4c531",
+        "name": "update bridge table statement",
+        "func": "let str = msg.payload;\nlet arr = str.split(\"-\");\nlet m = { \"topic\": \"update bridge set conf='\" + arr[1] + \"' where portnum='\" + arr[0] + \"'\" };\nreturn m;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 290,
+        "y": 180,
+        "wires": [
+            [
+                "64cafb38352dfb8f"
+            ]
+        ]
+    },
+    {
+        "id": "79e426b0d8f82670",
+        "type": "link out",
+        "z": "7a0ce80e53d4c531",
+        "name": "query bridge table",
+        "mode": "link",
+        "links": [
+            "d7114dbd.39d7"
+        ],
+        "x": 475,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "70c7a1f92d3dc7b6",
+        "type": "comment",
+        "z": "7a0ce80e53d4c531",
+        "name": "update bridge",
+        "info": "listen on radio interfaces for updating bridge table",
+        "x": 130,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "73fd41580cdac880",
+        "type": "debug",
+        "z": "7a0ce80e53d4c531",
+        "name": "",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 450,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "97158aa1.026308",
+        "type": "sqlitedb",
+        "db": "/home/pi/db/data.db",
+        "mode": "RW"
+    }
+]
