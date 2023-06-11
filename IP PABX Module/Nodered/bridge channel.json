@@ -258,7 +258,7 @@
         "type": "function",
         "z": "95a39b4369b3aa5b",
         "name": "update bridge table",
-        "func": "let str = { payload: \"port3-\" + msg.payload };\nreturn str;",
+        "func": "let load = \"port3-\" + msg.payload;\nlet str = { payload: load };\nreturn str;",
         "outputs": 1,
         "noerr": 0,
         "initialize": "",
