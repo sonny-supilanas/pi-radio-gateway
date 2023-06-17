@@ -43,11 +43,16 @@
                 "v": "DTMF begin '0' received",
                 "vt": "str",
                 "case": false
+            },
+            {
+                "t": "cont",
+                "v": "Spawn extension (macro-hangupcall, s, 4) exited non-zero on",
+                "vt": "str"
             }
         ],
         "checkall": "false",
         "repair": false,
-        "outputs": 2,
+        "outputs": 3,
         "x": 170,
         "y": 160,
         "wires": [
@@ -56,6 +61,9 @@
             ],
             [
                 "d6a89c03bb9f1daa"
+            ],
+            [
+                "9a73d475cf3478be"
             ]
         ]
     },
@@ -94,7 +102,7 @@
         "y": 120,
         "wires": [
             [
-                "ba1d4734e6608f37"
+                "2b30dc9a81c27697"
             ],
             [],
             []
@@ -141,22 +149,46 @@
                 "t": "cont",
                 "v": "2013",
                 "vt": "num"
+            },
+            {
+                "t": "cont",
+                "v": "2014",
+                "vt": "num"
+            },
+            {
+                "t": "cont",
+                "v": "2001",
+                "vt": "num"
+            },
+            {
+                "t": "cont",
+                "v": "2002",
+                "vt": "num"
             }
         ],
         "checkall": "false",
         "repair": false,
-        "outputs": 3,
-        "x": 780,
-        "y": 80,
+        "outputs": 6,
+        "x": 180,
+        "y": 500,
         "wires": [
             [
-                "1de74cbde4bbb5a7"
+                "06b578078c7bee3f"
             ],
             [
-                "af6d7bdc752ce402"
+                "ce87f764fcb29901"
             ],
             [
-                "e07205ce85ccac60"
+                "014d3c28b734ecbb"
+            ],
+            [
+                "19409a9de540492e"
+            ],
+            [
+                "ddc85603bf3fef9f"
+            ],
+            [
+                "6608528ef62d75ab"
             ]
         ]
     },
@@ -176,7 +208,7 @@
         "y": 220,
         "wires": [
             [
-                "33a99222e3373025"
+                "e773e5d8e72a4e8b"
             ],
             [],
             []
@@ -204,101 +236,788 @@
                 "t": "cont",
                 "v": "2013",
                 "vt": "num"
+            },
+            {
+                "t": "cont",
+                "v": "2014",
+                "vt": "num"
+            },
+            {
+                "t": "cont",
+                "v": "2001",
+                "vt": "num"
+            },
+            {
+                "t": "cont",
+                "v": "2002",
+                "vt": "num"
             }
         ],
         "checkall": "false",
         "repair": false,
-        "outputs": 3,
-        "x": 780,
-        "y": 180,
+        "outputs": 6,
+        "x": 160,
+        "y": 960,
         "wires": [
             [
-                "8b8a2d8df8d658cb"
+                "3dde74f32b40e83b"
             ],
             [
-                "61a2c8711d7c160a"
+                "f870d3f231170bc4"
             ],
             [
-                "fe5f4d92a1b6a53e"
+                "63f7e7b10abf60d1"
+            ],
+            [
+                "f3e25b91f739bb5c"
+            ],
+            [
+                "e16e1522bad81e2a"
+            ],
+            [
+                "f1eff6688defbd4a"
             ]
         ]
     },
     {
-        "id": "1de74cbde4bbb5a7",
+        "id": "9a73d475cf3478be",
+        "type": "function",
+        "z": "cd77c37112850855",
+        "name": "call hangup",
+        "func": "let arr = msg.payload.split(\"/\");\nlet slice_str = arr[1].slice(0, 13);\nlet str = { payload : 'PJSIP/' + slice_str};\n//let str = { payload : 'PJSIP/' + arr[1]};\nreturn str;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 330,
+        "y": 280,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9412896cde098407",
+        "type": "change",
+        "z": "cd77c37112850855",
+        "name": "ON-port1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "ON-port1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1100,
+        "y": 500,
+        "wires": [
+            [
+                "f9f906e11734c458"
+            ]
+        ]
+    },
+    {
+        "id": "8907b8bce40c767e",
+        "type": "change",
+        "z": "cd77c37112850855",
+        "name": "ON-port2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "ON-port2",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1100,
+        "y": 540,
+        "wires": [
+            [
+                "f9f906e11734c458"
+            ]
+        ]
+    },
+    {
+        "id": "77f0d0ef94e185d6",
+        "type": "change",
+        "z": "cd77c37112850855",
+        "name": "ON-port3",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "ON-port3",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1100,
+        "y": 580,
+        "wires": [
+            [
+                "f9f906e11734c458"
+            ]
+        ]
+    },
+    {
+        "id": "f9f906e11734c458",
         "type": "link out",
         "z": "cd77c37112850855",
-        "name": "2011 ON",
+        "name": "dtmf on",
         "mode": "link",
         "links": [
-            "19f922be8f16f40d"
+            "e30e5b6ef9fa3f08"
         ],
-        "x": 935,
-        "y": 60,
+        "x": 1285,
+        "y": 540,
         "wires": []
     },
     {
-        "id": "8b8a2d8df8d658cb",
+        "id": "ef7f8b6107eb089f",
+        "type": "change",
+        "z": "cd77c37112850855",
+        "name": "OFF-port1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "OFF-port1",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1090,
+        "y": 920,
+        "wires": [
+            [
+                "42592a880e6873f1"
+            ]
+        ]
+    },
+    {
+        "id": "983414f5ce1cc4e0",
+        "type": "change",
+        "z": "cd77c37112850855",
+        "name": "OFF-port2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "OFF-port2",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1090,
+        "y": 960,
+        "wires": [
+            [
+                "42592a880e6873f1"
+            ]
+        ]
+    },
+    {
+        "id": "5f1d36b133fb951b",
+        "type": "change",
+        "z": "cd77c37112850855",
+        "name": "OFF-port3",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "OFF-port3",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1090,
+        "y": 1000,
+        "wires": [
+            [
+                "42592a880e6873f1"
+            ]
+        ]
+    },
+    {
+        "id": "42592a880e6873f1",
         "type": "link out",
         "z": "cd77c37112850855",
-        "name": "2011 OFF",
+        "name": "dtmf off",
         "mode": "link",
         "links": [
-            "7cc3fd0c349a8855"
+            "f1b368711f027792"
         ],
-        "x": 935,
-        "y": 160,
+        "x": 1305,
+        "y": 960,
         "wires": []
     },
     {
-        "id": "af6d7bdc752ce402",
+        "id": "06b578078c7bee3f",
+        "type": "sqlite",
+        "z": "cd77c37112850855",
+        "mydb": "97158aa1.026308",
+        "sqlquery": "fixed",
+        "sql": "select portnum from bridge where conf=2011",
+        "name": "query ports on conf 2011",
+        "x": 490,
+        "y": 440,
+        "wires": [
+            [
+                "ffa4647899b0c4b7"
+            ]
+        ]
+    },
+    {
+        "id": "ce87f764fcb29901",
+        "type": "sqlite",
+        "z": "cd77c37112850855",
+        "mydb": "97158aa1.026308",
+        "sqlquery": "fixed",
+        "sql": "select portnum from bridge where conf=2012",
+        "name": "query ports on conf 2012",
+        "x": 490,
+        "y": 480,
+        "wires": [
+            [
+                "ffa4647899b0c4b7"
+            ]
+        ]
+    },
+    {
+        "id": "014d3c28b734ecbb",
+        "type": "sqlite",
+        "z": "cd77c37112850855",
+        "mydb": "97158aa1.026308",
+        "sqlquery": "fixed",
+        "sql": "select portnum from bridge where conf=2013",
+        "name": "query ports on conf 2013",
+        "x": 490,
+        "y": 520,
+        "wires": [
+            [
+                "ffa4647899b0c4b7"
+            ]
+        ]
+    },
+    {
+        "id": "ddc85603bf3fef9f",
+        "type": "sqlite",
+        "z": "cd77c37112850855",
+        "mydb": "97158aa1.026308",
+        "sqlquery": "fixed",
+        "sql": "select portnum from bridge where conf=2001",
+        "name": "query ports on conf 2001",
+        "x": 490,
+        "y": 600,
+        "wires": [
+            [
+                "ffa4647899b0c4b7"
+            ]
+        ]
+    },
+    {
+        "id": "6608528ef62d75ab",
+        "type": "sqlite",
+        "z": "cd77c37112850855",
+        "mydb": "97158aa1.026308",
+        "sqlquery": "fixed",
+        "sql": "select portnum from bridge where conf=2002",
+        "name": "query ports on conf 2002",
+        "x": 490,
+        "y": 640,
+        "wires": [
+            [
+                "ffa4647899b0c4b7"
+            ]
+        ]
+    },
+    {
+        "id": "ffa4647899b0c4b7",
+        "type": "split",
+        "z": "cd77c37112850855",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 750,
+        "y": 520,
+        "wires": [
+            [
+                "06b6e28ac6b4fa51"
+            ]
+        ]
+    },
+    {
+        "id": "f0b0e3c70e6a4ac4",
+        "type": "switch",
+        "z": "cd77c37112850855",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "port1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "port2",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "port3",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "port4",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 4,
+        "x": 930,
+        "y": 540,
+        "wires": [
+            [
+                "9412896cde098407"
+            ],
+            [
+                "8907b8bce40c767e"
+            ],
+            [
+                "77f0d0ef94e185d6"
+            ],
+            [
+                "f7c8e6adaeccbaf0"
+            ]
+        ]
+    },
+    {
+        "id": "2b30dc9a81c27697",
         "type": "link out",
         "z": "cd77c37112850855",
-        "name": "2012 ON",
+        "name": "ptt ON",
         "mode": "link",
         "links": [
-            "1c48da0e93c4a994"
+            "bc77d407f6b2f182"
         ],
-        "x": 995,
+        "x": 745,
         "y": 100,
         "wires": []
     },
     {
-        "id": "e07205ce85ccac60",
-        "type": "link out",
+        "id": "bc77d407f6b2f182",
+        "type": "link in",
         "z": "cd77c37112850855",
-        "name": "2013 ON",
-        "mode": "link",
+        "name": "ptt ON",
         "links": [
-            "fe148196295572e6"
+            "2b30dc9a81c27697",
+            "bf3cf31fb1cab98a"
         ],
-        "x": 1045,
-        "y": 140,
-        "wires": []
+        "x": 195,
+        "y": 400,
+        "wires": [
+            [
+                "ba1d4734e6608f37"
+            ]
+        ]
     },
     {
-        "id": "61a2c8711d7c160a",
+        "id": "06b6e28ac6b4fa51",
+        "type": "function",
+        "z": "cd77c37112850855",
+        "name": "to string",
+        "func": "let port = {payload: msg.payload.portnum};\nreturn port;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 760,
+        "y": 600,
+        "wires": [
+            [
+                "f0b0e3c70e6a4ac4"
+            ]
+        ]
+    },
+    {
+        "id": "e773e5d8e72a4e8b",
         "type": "link out",
         "z": "cd77c37112850855",
-        "name": "2012 OFF",
+        "name": "ptt OFF",
         "mode": "link",
         "links": [
-            "f9bab0a2fdcfe676"
+            "a0c8c578502dac65"
         ],
-        "x": 995,
+        "x": 745,
         "y": 200,
         "wires": []
     },
     {
-        "id": "fe5f4d92a1b6a53e",
-        "type": "link out",
+        "id": "a0c8c578502dac65",
+        "type": "link in",
         "z": "cd77c37112850855",
-        "name": "2013 OFF",
-        "mode": "link",
+        "name": "ptt OFF",
         "links": [
-            "dc2b2a4ad532ec5a"
+            "e773e5d8e72a4e8b",
+            "0b5a0c22411c1deb"
         ],
-        "x": 1045,
-        "y": 240,
+        "x": 135,
+        "y": 860,
+        "wires": [
+            [
+                "33a99222e3373025"
+            ]
+        ]
+    },
+    {
+        "id": "3dde74f32b40e83b",
+        "type": "sqlite",
+        "z": "cd77c37112850855",
+        "mydb": "97158aa1.026308",
+        "sqlquery": "fixed",
+        "sql": "select portnum from bridge where conf=2011",
+        "name": "query ports on conf 2011",
+        "x": 470,
+        "y": 880,
+        "wires": [
+            [
+                "50e5be2221660cb3"
+            ]
+        ]
+    },
+    {
+        "id": "f870d3f231170bc4",
+        "type": "sqlite",
+        "z": "cd77c37112850855",
+        "mydb": "97158aa1.026308",
+        "sqlquery": "fixed",
+        "sql": "select portnum from bridge where conf=2012",
+        "name": "query ports on conf 2012",
+        "x": 470,
+        "y": 920,
+        "wires": [
+            [
+                "50e5be2221660cb3"
+            ]
+        ]
+    },
+    {
+        "id": "63f7e7b10abf60d1",
+        "type": "sqlite",
+        "z": "cd77c37112850855",
+        "mydb": "97158aa1.026308",
+        "sqlquery": "fixed",
+        "sql": "select portnum from bridge where conf=2013",
+        "name": "query ports on conf 2013",
+        "x": 470,
+        "y": 960,
+        "wires": [
+            [
+                "50e5be2221660cb3"
+            ]
+        ]
+    },
+    {
+        "id": "e16e1522bad81e2a",
+        "type": "sqlite",
+        "z": "cd77c37112850855",
+        "mydb": "97158aa1.026308",
+        "sqlquery": "fixed",
+        "sql": "select portnum from bridge where conf=2001",
+        "name": "query ports on conf 2001",
+        "x": 470,
+        "y": 1040,
+        "wires": [
+            [
+                "50e5be2221660cb3"
+            ]
+        ]
+    },
+    {
+        "id": "f1eff6688defbd4a",
+        "type": "sqlite",
+        "z": "cd77c37112850855",
+        "mydb": "97158aa1.026308",
+        "sqlquery": "fixed",
+        "sql": "select portnum from bridge where conf=2002",
+        "name": "query ports on conf 2002",
+        "x": 470,
+        "y": 1080,
+        "wires": [
+            [
+                "50e5be2221660cb3"
+            ]
+        ]
+    },
+    {
+        "id": "50e5be2221660cb3",
+        "type": "split",
+        "z": "cd77c37112850855",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 730,
+        "y": 940,
+        "wires": [
+            [
+                "35c2201c4042ec26"
+            ]
+        ]
+    },
+    {
+        "id": "35c2201c4042ec26",
+        "type": "function",
+        "z": "cd77c37112850855",
+        "name": "to string",
+        "func": "let port = {payload: msg.payload.portnum};\nreturn port;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 1020,
+        "wires": [
+            [
+                "f312e3bdae7f6f7e"
+            ]
+        ]
+    },
+    {
+        "id": "f312e3bdae7f6f7e",
+        "type": "switch",
+        "z": "cd77c37112850855",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "port1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "port2",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "port3",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "port4",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 4,
+        "x": 910,
+        "y": 960,
+        "wires": [
+            [
+                "ef7f8b6107eb089f"
+            ],
+            [
+                "983414f5ce1cc4e0"
+            ],
+            [
+                "5f1d36b133fb951b"
+            ],
+            [
+                "6b52ec40153c7d52"
+            ]
+        ]
+    },
+    {
+        "id": "77220c207e99c5c4",
+        "type": "comment",
+        "z": "cd77c37112850855",
+        "name": "to do: ptt off on hangup",
+        "info": "",
+        "x": 520,
+        "y": 280,
         "wires": []
+    },
+    {
+        "id": "c1a1e5dfac9c3055",
+        "type": "comment",
+        "z": "cd77c37112850855",
+        "name": "dtmf section",
+        "info": "monitor asterisk logfile for DTMF logs and run script to extract data",
+        "x": 430,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "e36482945fd3afbc",
+        "type": "comment",
+        "z": "cd77c37112850855",
+        "name": "query the bridge table",
+        "info": "query bridge table to check which port to trigger ON ",
+        "x": 480,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "49e8efd920995720",
+        "type": "comment",
+        "z": "cd77c37112850855",
+        "name": "query the bridge table",
+        "info": "query bridge table to check which port to trigger OFF ",
+        "x": 460,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "19409a9de540492e",
+        "type": "sqlite",
+        "z": "cd77c37112850855",
+        "mydb": "97158aa1.026308",
+        "sqlquery": "fixed",
+        "sql": "select portnum from bridge where conf=2014",
+        "name": "query ports on conf 2014",
+        "x": 490,
+        "y": 560,
+        "wires": [
+            [
+                "ffa4647899b0c4b7"
+            ]
+        ]
+    },
+    {
+        "id": "f1242827b385d611",
+        "type": "comment",
+        "z": "cd77c37112850855",
+        "name": "process each element in an array",
+        "info": "the result of the query is an array, split node is used by convention to process each element in an array.",
+        "x": 840,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "f3e25b91f739bb5c",
+        "type": "sqlite",
+        "z": "cd77c37112850855",
+        "mydb": "97158aa1.026308",
+        "sqlquery": "fixed",
+        "sql": "select portnum from bridge where conf=2014",
+        "name": "query ports on conf 2014",
+        "x": 470,
+        "y": 1000,
+        "wires": [
+            [
+                "50e5be2221660cb3"
+            ]
+        ]
+    },
+    {
+        "id": "f7c8e6adaeccbaf0",
+        "type": "change",
+        "z": "cd77c37112850855",
+        "name": "ON-port4",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "ON-port4",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1100,
+        "y": 620,
+        "wires": [
+            [
+                "f9f906e11734c458"
+            ]
+        ]
+    },
+    {
+        "id": "6b52ec40153c7d52",
+        "type": "change",
+        "z": "cd77c37112850855",
+        "name": "OFF-port4",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "OFF-port4",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1090,
+        "y": 1040,
+        "wires": [
+            [
+                "42592a880e6873f1"
+            ]
+        ]
+    },
+    {
+        "id": "97158aa1.026308",
+        "type": "sqlitedb",
+        "db": "/home/pi/db/data.db",
+        "mode": "RW"
     }
 ]

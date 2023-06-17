@@ -76,21 +76,21 @@
         "id": "9ca3e183.7f782",
         "type": "function",
         "z": "28973277.e9adbe",
-        "name": "",
+        "name": "c# ptt",
         "func": "let arr = msg.payload.split(\"-\");\nlet str = { payload : arr[0] };\nreturn [ str, msg ]; //original payload was returned to 2nd output",
         "outputs": 2,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 180,
+        "x": 170,
         "y": 300,
         "wires": [
             [
                 "a4ab4266a417418f"
             ],
             [
-                "caf052b7aec2eba7"
+                "7fd11fb616649e1f"
             ]
         ]
     },
@@ -112,7 +112,7 @@
         "allowrate": false,
         "outputs": 2,
         "x": 390,
-        "y": 300,
+        "y": 260,
         "wires": [
             [
                 "346c787b.a1c898"
@@ -128,12 +128,418 @@
         "z": "28973277.e9adbe",
         "name": "",
         "info": "sends ON/OFF string on the TCP socket back to c# VT to determine displaying \"KEY\" string",
-        "x": 340,
-        "y": 260,
+        "x": 400,
+        "y": 220,
         "wires": []
     },
     {
         "id": "caf052b7aec2eba7",
+        "type": "switch",
+        "z": "28973277.e9adbe",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "ON-port1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "OFF-port1",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ON-port2",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "OFF-port2",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ON-port3",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "OFF-port3",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 6,
+        "x": 350,
+        "y": 560,
+        "wires": [
+            [
+                "82aaf8a59312a863"
+            ],
+            [
+                "698359881574b7b0"
+            ],
+            [
+                "dfb419a72a43edb8"
+            ],
+            [
+                "5a3b5cf059bbd4b5"
+            ],
+            [
+                "0cd76c0d2b16cdeb"
+            ],
+            [
+                "6d9523522ab8793a"
+            ]
+        ]
+    },
+    {
+        "id": "4edd67d777c6e9c4",
+        "type": "rpi-gpio out",
+        "z": "28973277.e9adbe",
+        "name": "GPIO17 - 11",
+        "pin": "17",
+        "set": true,
+        "level": "1",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 770,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "7cb5c131646d2a8c",
+        "type": "rpi-gpio out",
+        "z": "28973277.e9adbe",
+        "name": "12 - GPIO18",
+        "pin": "18",
+        "set": true,
+        "level": "1",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 770,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "82aaf8a59312a863",
+        "type": "change",
+        "z": "28973277.e9adbe",
+        "name": "ON-port1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 540,
+        "y": 480,
+        "wires": [
+            [
+                "4edd67d777c6e9c4",
+                "7cb5c131646d2a8c"
+            ]
+        ]
+    },
+    {
+        "id": "698359881574b7b0",
+        "type": "change",
+        "z": "28973277.e9adbe",
+        "name": "OFF-port1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 520,
+        "wires": [
+            [
+                "4edd67d777c6e9c4",
+                "7cb5c131646d2a8c"
+            ]
+        ]
+    },
+    {
+        "id": "dfb419a72a43edb8",
+        "type": "change",
+        "z": "28973277.e9adbe",
+        "name": "ON-port2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 540,
+        "y": 620,
+        "wires": [
+            [
+                "9a45bcc3d2782ac6",
+                "3b882c9ad93d0707"
+            ]
+        ]
+    },
+    {
+        "id": "5a3b5cf059bbd4b5",
+        "type": "change",
+        "z": "28973277.e9adbe",
+        "name": "OFF-port2",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 660,
+        "wires": [
+            [
+                "9a45bcc3d2782ac6",
+                "3b882c9ad93d0707"
+            ]
+        ]
+    },
+    {
+        "id": "9a45bcc3d2782ac6",
+        "type": "rpi-gpio out",
+        "z": "28973277.e9adbe",
+        "name": "GPIO27 - 13 ",
+        "pin": "27",
+        "set": true,
+        "level": "1",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 750,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "3b882c9ad93d0707",
+        "type": "rpi-gpio out",
+        "z": "28973277.e9adbe",
+        "name": "GPIO22 - 15",
+        "pin": "22",
+        "set": true,
+        "level": "1",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 750,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "0cd76c0d2b16cdeb",
+        "type": "change",
+        "z": "28973277.e9adbe",
+        "name": "ON-port3",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "0",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 760,
+        "wires": [
+            [
+                "3cc0dda7a64818f9",
+                "3a833f3eebdaf8a2"
+            ]
+        ]
+    },
+    {
+        "id": "6d9523522ab8793a",
+        "type": "change",
+        "z": "28973277.e9adbe",
+        "name": "OFF-port3",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "1",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 800,
+        "wires": [
+            [
+                "3cc0dda7a64818f9",
+                "3a833f3eebdaf8a2"
+            ]
+        ]
+    },
+    {
+        "id": "3cc0dda7a64818f9",
+        "type": "rpi-gpio out",
+        "z": "28973277.e9adbe",
+        "name": "16 - GPIO23",
+        "pin": "23",
+        "set": true,
+        "level": "1",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 750,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "3a833f3eebdaf8a2",
+        "type": "rpi-gpio out",
+        "z": "28973277.e9adbe",
+        "name": "18 - GPIO24",
+        "pin": "24",
+        "set": true,
+        "level": "1",
+        "freq": "",
+        "out": "out",
+        "bcm": true,
+        "x": 750,
+        "y": 780,
+        "wires": []
+    },
+    {
+        "id": "e30e5b6ef9fa3f08",
+        "type": "link in",
+        "z": "28973277.e9adbe",
+        "name": "dtmf on",
+        "links": [
+            "f9f906e11734c458"
+        ],
+        "x": 235,
+        "y": 540,
+        "wires": [
+            [
+                "caf052b7aec2eba7"
+            ]
+        ]
+    },
+    {
+        "id": "f1b368711f027792",
+        "type": "link in",
+        "z": "28973277.e9adbe",
+        "name": "dtmf off",
+        "links": [
+            "42592a880e6873f1",
+            "f343d6f9a94a8e33"
+        ],
+        "x": 235,
+        "y": 600,
+        "wires": [
+            [
+                "caf052b7aec2eba7"
+            ]
+        ]
+    },
+    {
+        "id": "e74f91418971971f",
+        "type": "comment",
+        "z": "28973277.e9adbe",
+        "name": "ptt section",
+        "info": "",
+        "x": 240,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "20a41ed3771e37ba",
+        "type": "comment",
+        "z": "28973277.e9adbe",
+        "name": "c# voice terminal tcp socket",
+        "info": "tcp socket for voice terminal software, for ptt control",
+        "x": 240,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "a88216cafbce7dcc",
+        "type": "comment",
+        "z": "28973277.e9adbe",
+        "name": "port 1",
+        "info": "",
+        "x": 910,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "5ab3180b0d66b306",
+        "type": "comment",
+        "z": "28973277.e9adbe",
+        "name": "port 2",
+        "info": "",
+        "x": 890,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "856050d7a5a0f88f",
+        "type": "comment",
+        "z": "28973277.e9adbe",
+        "name": "port 3",
+        "info": "",
+        "x": 890,
+        "y": 760,
+        "wires": []
+    },
+    {
+        "id": "7fd11fb616649e1f",
         "type": "switch",
         "z": "28973277.e9adbe",
         "name": "",
@@ -169,386 +575,116 @@
                 "t": "eq",
                 "v": "OFF-2013",
                 "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ON-2014",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "OFF-2014",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ON-2001",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "OFF-2001",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "ON-2002",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "OFF-2002",
+                "vt": "str"
             }
         ],
         "checkall": "false",
         "repair": false,
-        "outputs": 6,
-        "x": 250,
-        "y": 460,
-        "wires": [
-            [
-                "82aaf8a59312a863"
-            ],
-            [
-                "698359881574b7b0"
-            ],
-            [
-                "dfb419a72a43edb8"
-            ],
-            [
-                "5a3b5cf059bbd4b5"
-            ],
-            [
-                "0cd76c0d2b16cdeb"
-            ],
-            [
-                "6d9523522ab8793a"
-            ]
-        ]
-    },
-    {
-        "id": "4edd67d777c6e9c4",
-        "type": "rpi-gpio out",
-        "z": "28973277.e9adbe",
-        "name": "GPIO17 - 11",
-        "pin": "17",
-        "set": true,
-        "level": "1",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 670,
-        "y": 360,
-        "wires": []
-    },
-    {
-        "id": "7cb5c131646d2a8c",
-        "type": "rpi-gpio out",
-        "z": "28973277.e9adbe",
-        "name": "12 - GPIO18",
-        "pin": "18",
-        "set": true,
-        "level": "1",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 670,
-        "y": 400,
-        "wires": []
-    },
-    {
-        "id": "82aaf8a59312a863",
-        "type": "change",
-        "z": "28973277.e9adbe",
-        "name": "ON-2011",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "0",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 440,
-        "y": 380,
-        "wires": [
-            [
-                "4edd67d777c6e9c4",
-                "7cb5c131646d2a8c"
-            ]
-        ]
-    },
-    {
-        "id": "698359881574b7b0",
-        "type": "change",
-        "z": "28973277.e9adbe",
-        "name": "OFF-2011",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "1",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 430,
-        "y": 420,
-        "wires": [
-            [
-                "4edd67d777c6e9c4",
-                "7cb5c131646d2a8c"
-            ]
-        ]
-    },
-    {
-        "id": "dfb419a72a43edb8",
-        "type": "change",
-        "z": "28973277.e9adbe",
-        "name": "ON-2012",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "0",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 440,
-        "y": 520,
-        "wires": [
-            [
-                "9a45bcc3d2782ac6",
-                "3b882c9ad93d0707"
-            ]
-        ]
-    },
-    {
-        "id": "5a3b5cf059bbd4b5",
-        "type": "change",
-        "z": "28973277.e9adbe",
-        "name": "OFF-2012",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "1",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 430,
-        "y": 560,
-        "wires": [
-            [
-                "9a45bcc3d2782ac6",
-                "3b882c9ad93d0707"
-            ]
-        ]
-    },
-    {
-        "id": "9a45bcc3d2782ac6",
-        "type": "rpi-gpio out",
-        "z": "28973277.e9adbe",
-        "name": "GPIO27 - 13 ",
-        "pin": "27",
-        "set": true,
-        "level": "1",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 650,
-        "y": 500,
-        "wires": []
-    },
-    {
-        "id": "3b882c9ad93d0707",
-        "type": "rpi-gpio out",
-        "z": "28973277.e9adbe",
-        "name": "GPIO22 - 15",
-        "pin": "22",
-        "set": true,
-        "level": "1",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 650,
-        "y": 540,
-        "wires": []
-    },
-    {
-        "id": "0cd76c0d2b16cdeb",
-        "type": "change",
-        "z": "28973277.e9adbe",
-        "name": "ON-2013",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "0",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 420,
-        "y": 660,
-        "wires": [
-            [
-                "3cc0dda7a64818f9",
-                "3a833f3eebdaf8a2"
-            ]
-        ]
-    },
-    {
-        "id": "6d9523522ab8793a",
-        "type": "change",
-        "z": "28973277.e9adbe",
-        "name": "OFF-2013",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "1",
-                "tot": "num"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 410,
-        "y": 700,
-        "wires": [
-            [
-                "3cc0dda7a64818f9",
-                "3a833f3eebdaf8a2"
-            ]
-        ]
-    },
-    {
-        "id": "3cc0dda7a64818f9",
-        "type": "rpi-gpio out",
-        "z": "28973277.e9adbe",
-        "name": "16 - GPIO23",
-        "pin": "23",
-        "set": true,
-        "level": "1",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 650,
-        "y": 640,
-        "wires": []
-    },
-    {
-        "id": "3a833f3eebdaf8a2",
-        "type": "rpi-gpio out",
-        "z": "28973277.e9adbe",
-        "name": "18 - GPIO24",
-        "pin": "24",
-        "set": true,
-        "level": "1",
-        "freq": "",
-        "out": "out",
-        "bcm": true,
-        "x": 650,
-        "y": 680,
-        "wires": []
-    },
-    {
-        "id": "19f922be8f16f40d",
-        "type": "link in",
-        "z": "28973277.e9adbe",
-        "name": "2011 ON",
-        "links": [
-            "1de74cbde4bbb5a7"
-        ],
-        "x": 315,
+        "outputs": 12,
+        "x": 550,
         "y": 360,
         "wires": [
             [
-                "82aaf8a59312a863"
+                "bf3cf31fb1cab98a"
+            ],
+            [
+                "0b5a0c22411c1deb"
+            ],
+            [
+                "bf3cf31fb1cab98a"
+            ],
+            [
+                "0b5a0c22411c1deb"
+            ],
+            [
+                "bf3cf31fb1cab98a"
+            ],
+            [
+                "0b5a0c22411c1deb"
+            ],
+            [
+                "bf3cf31fb1cab98a"
+            ],
+            [
+                "0b5a0c22411c1deb"
+            ],
+            [
+                "bf3cf31fb1cab98a"
+            ],
+            [
+                "0b5a0c22411c1deb"
+            ],
+            [
+                "bf3cf31fb1cab98a"
+            ],
+            [
+                "0b5a0c22411c1deb"
             ]
         ]
     },
     {
-        "id": "7cc3fd0c349a8855",
-        "type": "link in",
+        "id": "bf3cf31fb1cab98a",
+        "type": "link out",
         "z": "28973277.e9adbe",
-        "name": "2011 OFF",
+        "name": "c# on",
+        "mode": "link",
         "links": [
-            "8b8a2d8df8d658cb"
+            "bc77d407f6b2f182"
         ],
-        "x": 245,
+        "x": 715,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "0b5a0c22411c1deb",
+        "type": "link out",
+        "z": "28973277.e9adbe",
+        "name": "c# off",
+        "mode": "link",
+        "links": [
+            "a0c8c578502dac65"
+        ],
+        "x": 715,
         "y": 380,
-        "wires": [
-            [
-                "698359881574b7b0"
-            ]
-        ]
+        "wires": []
     },
     {
-        "id": "1c48da0e93c4a994",
-        "type": "link in",
+        "id": "9e1c89bdba6d1e58",
+        "type": "comment",
         "z": "28973277.e9adbe",
-        "name": "2012 ON",
-        "links": [
-            "af6d7bdc752ce402"
-        ],
-        "x": 215,
-        "y": 540,
-        "wires": [
-            [
-                "dfb419a72a43edb8"
-            ]
-        ]
-    },
-    {
-        "id": "f9bab0a2fdcfe676",
-        "type": "link in",
-        "z": "28973277.e9adbe",
-        "name": "2012 OFF",
-        "links": [
-            "61a2c8711d7c160a"
-        ],
-        "x": 215,
-        "y": 580,
-        "wires": [
-            [
-                "5a3b5cf059bbd4b5"
-            ]
-        ]
-    },
-    {
-        "id": "fe148196295572e6",
-        "type": "link in",
-        "z": "28973277.e9adbe",
-        "name": "2013 ON",
-        "links": [
-            "e07205ce85ccac60"
-        ],
-        "x": 215,
-        "y": 660,
-        "wires": [
-            [
-                "0cd76c0d2b16cdeb"
-            ]
-        ]
-    },
-    {
-        "id": "dc2b2a4ad532ec5a",
-        "type": "link in",
-        "z": "28973277.e9adbe",
-        "name": "2013 OFF",
-        "links": [
-            "fe5f4d92a1b6a53e"
-        ],
-        "x": 215,
-        "y": 700,
-        "wires": [
-            [
-                "6d9523522ab8793a"
-            ]
-        ]
+        "name": "conference num hardcoded",
+        "info": "port1 - 2011\nport2 - 2012\nport3 - 2013\nport4 - 2014\ngroup1 - 2001\ngroup2 - 2002",
+        "x": 740,
+        "y": 260,
+        "wires": []
     }
 ]
